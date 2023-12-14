@@ -48,22 +48,22 @@ def convert_to_mfcc_extra(data):
 
     return result
 
-def noise(data):
+def noise(data, *args):
     noise_amp = 0.035*np.random.uniform()*np.amax(data)
     data = data + noise_amp*np.random.normal(size=data.shape[0])
     return data
 
-def stretch(data, rate=0.8):
+def stretch(data, *args, rate=0.8):
     return librosa.effects.time_stretch(data, rate=rate)
 
-def shift(data):
+def shift(data, *args):
     shift_range = int(np.random.uniform(low=-5, high = 5)*1000)
     return np.roll(data, shift_range)
 
 def pitch(data, sampling_rate, pitch_factor=0.7):
     return librosa.effects.pitch_shift(data, sr=sampling_rate, n_steps=pitch_factor)
 
-def cutoffs(data):
+def cutoffs(data, *args):
     n = np.random.randint(1, 3)
     for i in range(n):
         f = int(np.random.uniform(0.0, 0.2) * len(data))
